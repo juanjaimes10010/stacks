@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>My first three.js app</title>
+		<style>
+			body { margin: 0; }
+		</style>
+	</head>
+	<body>
+		<script src="three.js-master/build/three.min.js"></script>
+        <script src="cannon.js-master/build/cannon.min.js"></script>
+        <script src="script.js"></script>
+        <script src="functions.js"></script>
+		<script>
+            // three js and cannon js init function
+            init();
+            
+            let STACK = false;
+            let score = 0;
+            let speed = 0.010;
+            let color = 10;  
+            let direction = {x: true, z: false}; 
+            let forward = true;
+            let x = 0;
+            let y = 0;
+            let z = 0;      
+            let height = 1;
+            let width = 3;
+            let depth = 3;
+            let cube;
+            let shape;
+            
+            // first block
+            addBlock(x,y,z,width,height,depth);
+            speed += .005;
+            y++;
+        
+            color += 5;
+
+            // !!!!!!!!!!!!!!!!!!!!!!!!START GAME!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! //
+            STACK = true;
+
+            placeBlock(); 
+
+            // game loop
+			function animate() {
+				requestAnimationFrame( animate );
+                move();
+				renderer.render( scene, camera );
+			};
+			animate();
+
+            // controls
+            addEventListener('keypress', e => {
+                if(e.code === 'Space' || e.key === " ") {
+                    placeBlock();   
+                    score++;
+                    console.log('your score: ', score)
+                }
+            })
+		</script>
+	</body>
+</html>
